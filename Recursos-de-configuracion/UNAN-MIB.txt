@@ -1,0 +1,131 @@
+UNAN-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	DisplayString
+                FROM RFC1213-MIB
+        enterprises, TimeTicks, Gauge, INTEGER
+                FROM RFC1155-SMI
+        OBJECT-TYPE
+                FROM RFC-1212;
+
+unan            OBJECT IDENTIFIER ::= { enterprises 1111 }
+resources       OBJECT IDENTIFIER ::= { unan 1 }
+cpuUsage        OBJECT IDENTIFIER ::= { resources 1 }
+memoryUsage     OBJECT IDENTIFIER ::= { resources 2 }
+
+
+
+cpuUsageUser    OBJECT-TYPE
+	SYNTAX      TimeTicks 
+	ACCESS      read-only
+	STATUS      mandatory
+	DESCRIPTION
+		        "Consumo de cpu de usuario"
+        ::= { cpuUsage 1 }
+
+cpuUsageNice    OBJECT-TYPE
+	SYNTAX      TimeTicks
+	ACCESS      read-only
+	STATUS      mandatory
+	DESCRIPTION
+		        "Consumo de cpu de usuario de baja prioridad"
+	::= { cpuUsage 2 }
+
+cpuUsageSystem  OBJECT-TYPE
+	SYNTAX      TimeTicks
+	ACCESS      read-only
+	STATUS      mandatory
+	DESCRIPTION
+		        "Consumo de cpu del sistema"
+    ::= { cpuUsage 3 }
+
+cpuUsageIddle   OBJECT-TYPE
+	SYNTAX      TimeTicks
+	ACCESS      read-only
+	STATUS      mandatory
+	DESCRIPTION
+		        "¿?"
+    ::= { cpuUsage 4 }
+
+cpuUsageIo      OBJECT-TYPE
+	SYNTAX      TimeTicks  
+	ACCESS      read-only
+	STATUS      mandatory
+	DESCRIPTION
+		        "Consumo de cpu en peticiones IO"
+    ::= { cpuUsage 5 }
+
+cpuUsageIrq     OBJECT-TYPE
+	SYNTAX      TimeTicks
+	ACCESS      read-only
+	STATUS      mandatory
+	DESCRIPTION
+		        "Interrupciones"
+    ::= { cpuUsage 6 }
+
+cpuUsageSoftIrq OBJECT-TYPE
+	SYNTAX      TimeTicks
+	ACCESS      read-only
+	STATUS      mandatory
+	DESCRIPTION
+		        "¿Soft IRQ?"
+    ::= { cpuUsage 7 }
+
+--- Subsystems group
+
+memoryUsageTotalRam OBJECT-TYPE
+	SYNTAX      INTEGER
+	UNITS       "MiB"
+	ACCESS      read-only
+	STATUS      current
+	DESCRIPTION
+		        "Cantidad en Mebibyte de RAM total"
+	::= { memoryUsage 1 }
+
+memoryUsageFreeRam OBJECT-TYPE
+	SYNTAX      INTEGER
+	UNITS       "MiB"
+	ACCESS      read-only
+	STATUS      current
+	DESCRIPTION
+		        "Cantidad en Mebibyte de RAM libre"
+	::= { memoryUsage 2 }
+
+memoryUsageSharedRam OBJECT-TYPE
+	SYNTAX      INTEGER
+	UNITS       "MiB"
+	ACCESS      read-only
+	STATUS      current
+	DESCRIPTION
+		        "Cantidad en Mebibyte de RAM compartida"
+	::= { memoryUsage 3 }
+
+memoryUsageBufferRam OBJECT-TYPE
+	SYNTAX      INTEGER
+	UNITS       "MiB"
+	ACCESS      read-only
+	STATUS      current
+	DESCRIPTION
+                        "Cantidad en Mebibyte de RAM Reservada"
+    ::= { memoryUsage 4 }
+
+memoryUsageTotalSwap OBJECT-TYPE
+	SYNTAX      INTEGER
+	UNITS       "MiB"
+	ACCESS      read-only
+	STATUS      current
+	DESCRIPTION
+                        "Cantidad en Mebibyte de Swap total"
+    ::= { memoryUsage 5 }
+
+memoryUsageFreeSwap OBJECT-TYPE
+	SYNTAX      INTEGER
+	UNITS       "MiB"
+	ACCESS      read-only
+	STATUS      current
+	DESCRIPTION
+                        "Cantidad en Mebibyte de Swap libre"
+    ::= { memoryUsage 6 }
+
+END
+
